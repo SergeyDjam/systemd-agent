@@ -1,0 +1,1 @@
+systemd-agent  ALL=NOPASSWD:/usr/bin/systemctl status %UNIT%, /usr/bin/systemctl start %UNIT%, /usr/bin/systemct stop %UNIT%, /usr/bin/systemctl restart %UNIT%

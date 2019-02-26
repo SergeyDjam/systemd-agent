@@ -1,0 +1,22 @@
+[Unit]
+Description="Systemd management over network"
+After=network.target
+
+[Service]
+Type=simple
+
+ExecStart=/usr/bin/systemd-agent
+
+User=systemd-agent
+Group=systemd-agent
+UMask=0007
+Restart=always
+RestartSec=5
+TimeoutStopSec=10
+KillMode=process
+Restart=on-failure
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target
+
