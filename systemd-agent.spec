@@ -1,10 +1,14 @@
+%define		debug %nil
+%define		debug_package %nil
+
 Name:		systemd-agent
 Version:	0.0.1
 Release:	1
 Summary:	Systemd tcp daemon
 License:	GPL
-Source:		%{name}-%{version}.tar.gz
-Group:		System
+URL:		https://github.com/SergeyDjam/systemd-agent
+Source:		%{name}.tar.gz
+Group:		System/Configuration/Networking
 BuildRequires:	go
 Requires:	systemd
 
@@ -12,7 +16,7 @@ Requires:	systemd
 Managing systemctl over network
 
 %prep
-%setup -q %{name}-%{version}
+%setup -qn %{name}
 
 %build
 go build -o %{name}
@@ -20,8 +24,9 @@ go build -o %{name}
 %install
 install -d %{buildroot}%{_bindir} %{buildroot}%{_unitdir} %{buildroot}%{_sysconfdir}/sudoers.d
 install -Dm0755 %{name} %{buildroot}%{_bindir}
-install -Dm0755 %{name}.sudoers %{buildroot}%{_sysconfdir}/suders.d/%{name}
+install -Dm0755 %{name}.sudoers %{buildroot}%{_sysconfdir}/sudoers.d/%{name}
 install -Dm0755 %{name}.cfg.sample %{buildroot}%{_sysconfdir}/%{name}.cfg
+install -Dm0755 %{name}.service %{buildroot}%{_unitdir}
 
 %files
 %doc README.md
